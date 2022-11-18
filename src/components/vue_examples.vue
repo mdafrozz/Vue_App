@@ -1,126 +1,122 @@
 <template>
   <div id="app">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-post-photo.jpg" class="main-photo">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/28963/vue-main-profile.jpg" class="main-profile">
-    <div class="main-info">
-      <span class="name">Julianne Delfina</span>
-      <h3>"It's lovely after it rains"</h3>
+  <form @submit.prevent="submitForm">
+    <div>
+      <label for="name">Name:</label><br>
+      <input id="name" type="text" v-model="name" required/>
     </div>
-    <hr>
-    
-    <ul>
-      <li v-for="comment in comments" :key="comment">
-        {{ comment }}
-      </li>
-    </ul>
-
-    <input @keyup.enter="addComment" v-model="newComment" placeholder="Add a comment" />
-  </div>
+    <div>
+      <label for="email">Email:</label><br>
+      <input id="email" type="email" v-model="email" required/>
+    </div>
+    <div>
+      <label for="caps">HOW DO I TURN OFF CAPS LOCK:</label><br>
+      <textarea id="caps" v-model="caps" required></textarea>
+    </div>
+    <button :class="[name ? activeClass : '']" type="submit">Submit</button>
+    <div>
+      <h3>Response from server:</h3>
+      <pre>{{ response }}</pre>
+    </div>
+  </form>
+</div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "vue_examples",
   data() {
     return {
-      newComment: '',
-      comments: [
-        'Looks great Julianne!',
-        'I love the sea',
-        'Where are you at?'
-      ]
+      name: '',
+      email: '',
+      caps: '',
+      response: '',
+      activeClass: 'active'
     }
   },
   methods: {
-    addComment() {
-      this.comments.push(this.newComment)
-      this.newComment = ''
+    submitForm() {
+      axios.post('//jsonplaceholder.typicode.com/posts', {
+        name: this.name,
+        email: this.email,
+        caps: this.caps
+      }).then(response => {
+        this.response = JSON.stringify(response, null, 2)
+      }).catch(error => {
+        this.response = 'Error: ' + error.response.status
+      })
     }
   }
 }
 </script>
 
 <style>
-body {
-  font-family: 'Playfair Display', serif;
-}
 
 #app {
-  background: #212222;
-  color: #fff;
-  letter-spacing: 0.04em;
-  text-align: center;
-  margin: 60px;
-  width: 370px;
-  margin: 0 auto;
-  display: table;
-  padding: 20px;
-  line-height: 1.4em;
+  display: flex;
+  justify-content: center;
+  font-family: 'Work Sans', sans-serif;
 }
 
-.name {
-  color: #ccc;
-}
-
-small {
-  color: #bbb;
-  font-size: 10px;
-}
-
-h3 {
-  margin: 5px 0 4px;
-}
-
-.main-photo {
+form {
   width: 300px;
+  padding: 10px 40px  
 }
 
-.main-profile {
-  float: left;
-  border: 3px solid white;
-  margin: -25px 0 0 20px;
-  position: relative;
-  width: 80px;
+form label {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    font-weight: bold;
 }
 
-.main-info {
-  float: left;
-  padding: 10px 20px;
-  text-align: left;
-  margin-bottom: 15px;
+form input, textarea {
+    border: 1px solid #ccc;
+    color: #333;
+    width: calc(100% - 30px);
+  }
 
+form input, textarea, button {
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+  }
+
+form div {
+    margin: 20px 0;
+  }
+
+form label {
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.03em;
+    font-weight: bold;
+  }
+
+button {
+  color: white;
+  border: none;
+  width: 100%;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #ccc;
+  cursor: pointer;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+  transition: 0.25s all ease;
+  
+}
+button :hover {
+    transform: translateY(2px);
+  }
+
+  .active {
+  background-color: purple;
 }
 
-.main-info after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-li {
-  list-style: none outside none;
-  text-align: left;
-  padding: 10px 0;
-  border-bottom: 1px solid #555;
-}
-
-ul {
-  margin: 0;
-  padding: 0 35px;
-}
-
-hr {
-  margin: 75px 0 0 32px;
+pre-content {
   width: 300px;
-  border-top: 0;
-  border-bottom: 1px solid #555;
-}
-
-input {
-  font-family: 'Playfair Display', serif;
-  width: 280px;
-  margin: 30px 0;
-  padding: 8px 10px;
-  outline: 0;
 }
 </style>
