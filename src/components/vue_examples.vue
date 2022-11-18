@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
-  <ul>
-    <li v-for="num in 7" :key="num">
-      {{ num }}
-    </li>
-  </ul>
+<div id="app">
+  <h3>What is your favorite kind of taco?</h3>
+  <p><input v-model="tacos" /></p>
+  <p v-once>{{ tacos }}</p>
+  <span v-pre>This is good if I need to show the mustache view of {{ tacos }}</span>
+  <pre>{{ $data }}</pre>
 </div>
 </template>
 
@@ -13,6 +13,7 @@ export default {
   name: "vue_examples",
   data() {
     return {
+      tacos: 'I like Al Pastor tacos'
     }
   }
 }
@@ -43,10 +44,5 @@ button {
   color: white;
   padding: 0.5em 1em;
   border-radius: 3px;
-}
-
-.thumbs {
-  font-size: 40px;
-  margin-top: 20px;
 }
 </style>
