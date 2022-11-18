@@ -1,8 +1,17 @@
 <template>
-   <h3>What is your favorite kind of taco?</h3>
-  <textarea v-model="tacos"></textarea>
-  <br>
-  <button v-show="tacos" type="submit">Let us know!</button>
+  <div id="app">
+    <h3>Do you like tacos?</h3>
+
+    <input v-model="tacos" value="yes" type="radio" id="yes" />
+    <label for="yes"> yes</label><br />
+
+    <input v-model="tacos" value="no" type="radio" id="no" />
+    <label for="no"> no</label><br />
+
+    <p v-if="tacos === 'yes'" class="thumbs">👍</p>
+    <p v-else-if="tacos === 'no'">you're a monster</p>
+
+  </div>
 </template>
 
 <script>
@@ -43,4 +52,8 @@ button {
   border-radius: 3px;
 }
 
+.thumbs {
+  font-size: 40px;
+  margin-top: 20px;
+}
 </style>
