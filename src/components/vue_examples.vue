@@ -1,11 +1,8 @@
 <template>
-<div id="app">
-  <h3>What is your favorite kind of taco?</h3>
-  <p><input v-model="tacos" /></p>
-  <p v-once>{{ tacos }}</p>
-  <span v-pre>This is good if I need to show the mustache view of {{ tacos }}</span>
-  <pre>{{ $data }}</pre>
-</div>
+  <div id="app">
+    <h3>What is your favorite kind of taco?</h3>
+    <p v-html="tacos"></p>
+  </div>
 </template>
 
 <script>
@@ -13,8 +10,8 @@ export default {
   name: "vue_examples",
   data() {
     return {
-      tacos: 'I like Al Pastor tacos'
-    }
+      tacos: `I like <a href="http://www.epicurious.com/recipes/food/views/tacos-al-pastor-242132" target="_blank">Al Pastor</a> tacos `
+      }
   }
 }
 </script>
