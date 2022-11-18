@@ -1,20 +1,8 @@
 <template>
-  <div id="app">
-    <input v-model="checkedNames" type="checkbox" id="john" value="John" />
-    <label for="john"> John</label>
-
-    <input v-model="checkedNames" type="checkbox" id="paul" value="Paul" />
-    <label for="paul"> Paul</label>
-
-    <input v-model="checkedNames" type="checkbox" id="george" value="George" />
-    <label for="george"> George</label>
-
-    <input v-model="checkedNames" type="checkbox" id="ringo" value="Ringo" />
-    <label for="ringo"> Ringo</label>
-    <br>
-    <br>
-    Checked names:<span>{{ checkedNames }}</span>
-  </div>
+   <h3>What is your favorite kind of taco?</h3>
+  <textarea v-model="tacos"></textarea>
+  <br>
+  <button v-show="tacos" type="submit">Let us know!</button>
 </template>
 
 <script>
@@ -22,10 +10,10 @@ export default {
   name: "vue_examples",
   data() {
     return {
-      checkedNames: []
-    };
-  },
-};
+      tacos: ''
+    }
+  }
+}
 </script>
 
 <style>
@@ -36,6 +24,7 @@ body {
 #app {
   text-align: center;
   padding: 70px;
+  max-width: 360px;
   font-size: 16px;
   margin: 0 auto;
   display: table;
@@ -46,9 +35,12 @@ label {
   padding-right: 10px;
 }
 
-span {
-            color: green;
-            font-weight: bold;
-            font-size: 26px;
-        }
+button {
+  border: none;
+  background: orangered;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 3px;
+}
+
 </style>
