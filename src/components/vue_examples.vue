@@ -1,65 +1,54 @@
 <template>
-<div id="app">
-  <div class="row">
-    <input v-model.number="num1" type="number" />
-    <span>+</span>
-    <input v-model.number="num2" type="number" />
-    <span>=</span>
-    <span>{{ num1 + num2 }}</span>
+  <div id="app">
+    <input v-model="checkedNames" type="checkbox" id="john" value="John" />
+    <label for="john"> John</label>
+
+    <input v-model="checkedNames" type="checkbox" id="paul" value="Paul" />
+    <label for="paul"> Paul</label>
+
+    <input v-model="checkedNames" type="checkbox" id="george" value="George" />
+    <label for="george"> George</label>
+
+    <input v-model="checkedNames" type="checkbox" id="ringo" value="Ringo" />
+    <label for="ringo"> Ringo</label>
+    <br>
+    <br>
+    Checked names:<span>{{ checkedNames }}</span>
   </div>
-  <div class="row second">
-    <select v-model="name">
-      <option>Carne Asada</option>
-      <option>Pollo</option>
-      <option>Bean</option>
-      <option>Al Pastor</option>
-    </select>
-    <p v-if="name">My favorite kind of taco is {{ name }}</p>
-  </div>
-</div>
 </template>
 
 <script>
-export default{
-    name: 'vue_examples',
-    data() {
-      return {
-      num1: 0,
-      num2: 0,
-      name: ''
-    }
-  }
-}
+export default {
+  name: "vue_examples",
+  data() {
+    return {
+      checkedNames: []
+    };
+  },
+};
 </script>
 
 <style>
-
-.row {
-  margin: 50px;
-  display: flex;
-  justify-content: center;
-  font-family: 'Work Sans', sans-serif;
+body {
+  font-family: 'Bitter', serif;
 }
 
-input, span {
-  padding: 10px;
-  font-size: 30px;
-  font-family: 'Work Sans', sans-serif;
+#app {
+  text-align: center;
+  padding: 70px;
+  font-size: 16px;
+  margin: 0 auto;
+  display: table;
+  line-height: 2em;
 }
 
-input {
-  width: 50px;
+label {
+  padding-right: 10px;
 }
 
 span {
-  width: 20px;
-}
-
-.second {
-  font-size: 18px;
-}
-
-p {
-    margin-left: 20px;
-  }
+            color: green;
+            font-weight: bold;
+            font-size: 26px;
+        }
 </style>
